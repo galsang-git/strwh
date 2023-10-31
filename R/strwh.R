@@ -98,14 +98,14 @@ strwh <- function(p, s='A', units="mm", family="serif", fontsize=100, fontface=1
     fontface = 4
   }
   #3.Convert font
-  if(!familynames){
-    familynames = paste0(work_path, "/../data/familynames.csv")
+  if(is.null(familynames)){
+    familynames = paste0(work_path, "/data/familynames.csv")
   }
   familynames_df <- read.table(familynames, sep=";", header = TRUE, as.is=FALSE)
   family_pil <- familynames_df[familynames_df$R == family, 'PIL']
 
   #4.Measure text's width
-  if(!fonts_path){
+  if(is.null(fonts_path)){
     fonts_path <- "C:/Windows/Fonts"
   }
   width <- pill_strwh(s, family=family_pil, fontface=fontface, size=pt,
