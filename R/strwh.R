@@ -17,6 +17,29 @@ strwh_init <- function(python_path="python"){
   }
 }
 
+#' Get the path of this script
+#'
+#' @return a string, str, the path of this script
+#' @importFrom rstudioapi getSourceEditorContext
+#' @importFrom this.path this.path
+
+#' @export
+thisPath <- function() {
+  cmdArgs <- commandArgs(trailingOnly = FALSE)
+  if (length(grep("^-f$", cmdArgs)) > 0) {    # R console option
+    scriptPath <- normalizePath(dirname(cmdArgs[grep("^-f", cmdArgs) + 1]))[1]
+  } else if (length(grep("^--file=", cmdArgs)) > 0) {    # Rscript/R console option
+    scriptPath <- normalizePath(dirname(sub("^--file=", "", cmdArgs[grep("^--file=", cmdArgs)])))[1]
+  } else if (this.path()) {    # RStudio
+    scriptPath <- dirname(this.path())
+  }else if (Sys.getenv("RSTUDIO") == "1") {    # RStudio
+    scriptPath <- dirname(getSourceEditorContext()$path)
+  } else {    stop("Cannot find file path")
+  }
+  return(scriptPath)
+}
+
+
 #' Title
 #'
 #' @param p str, "ggplot2" or "grib"
@@ -25,13 +48,14 @@ strwh_init <- function(python_path="python"){
 #' @param family str, "serif"
 #' @param fontsize int, fontsize in ggplot2
 #' @param fontface int, fontface in 1,2,3,4
-#' @param familynames str, familynames.xls
+#' @param familynames str, data/familynames.csv
+#' @param fonts_path str, path of fonts
 #' @return a width of font, float,
 #' @export
-#' @importFrom this.path this.dir
 #' @importFrom grid is.grob
 #' @importFrom ggplot2 is.ggplot
 #' @importFrom utils read.table
+#' @importFrom reticulate source_python
 strwh <- function(p, s='A', units="mm", family="serif", fontsize=100, fontface=1,
                   familynames=NULL, fonts_path=NULL){
 
@@ -41,10 +65,10 @@ strwh <- function(p, s='A', units="mm", family="serif", fontsize=100, fontface=1
   # Default: font.weight
 
   #1.load python function
-  work_path <<- this.path::this.dir()
-  source_python(paste0(work_path, "/strwh/exec/functions.py"))
+  work_path <<- paste0(.libPaths()[1], "/strwh")
+  source_python(paste0(work_path, "/exec/functions.py"))
 
-  if(ggplot2::is.ggplot(p)){
+  if(is.ggplot(p)){
     bool_plot <- "ggplot2"
   }else if(is.grob(p)){
     bool_plot <- "grid"

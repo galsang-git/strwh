@@ -2,9 +2,12 @@
 
 export(strwh)
 export(strwh_init)
+export(thisPath)
 importFrom(ggplot2,is.ggplot)
 importFrom(grid,is.grob)
 importFrom(reticulate,py_available)
+importFrom(reticulate,source_python)
 importFrom(reticulate,use_python)
-importFrom(this.path,this.dir)
+importFrom(rstudioapi,getSourceEditorContext)
+importFrom(this.path,this.path)
 importFrom(utils,read.table)

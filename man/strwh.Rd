@@ -28,7 +28,9 @@ strwh(
 
 \item{fontface}{int, fontface in 1,2,3,4}
 
-\item{familynames}{str, familynames.xls}
+\item{familynames}{str, data/familynames.csv}
+
+\item{fonts_path}{str, path of fonts}
 }
 \value{
 a width of font, float,

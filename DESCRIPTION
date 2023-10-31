@@ -13,5 +13,5 @@ Imports:
     ggplot2,
     grid,
     reticulate,
-    this.path
+    rstudioapi
 Depends: R (>= 3.5.0)
