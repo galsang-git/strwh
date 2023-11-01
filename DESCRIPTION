@@ -12,6 +12,7 @@ RoxygenNote: 7.2.3
 Imports: 
     ggplot2,
     grid,
+    this.path,
     reticulate,
     rstudioapi
 Depends: R (>= 3.5.0)
