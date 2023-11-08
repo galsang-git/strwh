@@ -4,13 +4,22 @@
 \alias{strwh_init}
 \title{Load python in use_python}
 \usage{
-strwh_init(python_path = "python")
+strwh_init(
+  work_path = NULL,
+  python_path = NULL,
+  fonts_path = NULL,
+  FontFileType = "ttf"
+)
 }
 \arguments{
 \item{python_path}{str, a path of python.}
+
+\item{fonts_path}{str, path of fonts}
+
+\item{FontFileType}{str, ttf or afm}
 }
 \value{
-nothing
+a class
 }
 \description{
 Load python in use_python

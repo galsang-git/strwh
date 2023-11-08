@@ -6,13 +6,14 @@
 \usage{
 strwh(
   p,
-  s = "A",
+  s = "Ahkhds",
   units = "mm",
   family = "serif",
   fontsize = 100,
   fontface = 1,
   familynames = NULL,
-  fonts_path = NULL
+  work_path = NULL,
+  tmp
 )
 }
 \arguments{
@@ -30,7 +31,7 @@ strwh(
 
 \item{familynames}{str, data/familynames.csv}
 
-\item{fonts_path}{str, path of fonts}
+\item{tmp}{class}
 }
 \value{
 a width of font, float,

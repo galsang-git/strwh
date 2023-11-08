@@ -74,5 +74,41 @@ def pill_strwh(string, family, fontface, size, fonts_path):
     res = ImageFont.truetype(font_family_file, size, 0)
     box_px = res.getbbox(string)
     return(box_px[2])
-  
-  
+
+def pill_strwh_addFonts(fonts_path, FontFileType='ttf'):
+    """
+    :param fonts_path: str, fonts path
+    :return: class
+    """
+
+    # 加载字体
+    tmp = font_manager.FontManager()
+    font_files = font_manager.findSystemFonts(fontpaths=fonts_path, fontext=FontFileType)
+    for font_file in font_files:
+        try:
+            tmp.addfont(path=font_file)
+        except Exception as ex:
+            print(font_file, ex)
+            pass
+    return tmp
+
+def pill_strwh_measure(string, family, fontface, size, tmp):
+    """
+    :param string: str
+    :param family: str, "serif"
+    :param fontface: int, "regular"
+    :param size: int or float, px
+    :param work_path: str, work path, work_path+"/fonts/ttf"
+    :param tmp: class
+    :return: int, px
+    """
+
+    fontface_dict = {1: ["normal", "regular"], 2: ["normal", "bold"], 3: ["italic", "normal"], 4: ["italic", "bold"]}
+
+    font_family = font_manager.FontProperties(family=family, style=fontface_dict[fontface][0],
+                                              weight=fontface_dict[fontface][1])
+    font_family_file = tmp.findfont(font_family, directory=None, rebuild_if_missing=True)
+    print(font_family_file)
+    res = ImageFont.truetype(font_family_file, size, 0)
+    box_px = res.getbbox(string)
+    return(box_px[2])
