@@ -3,6 +3,11 @@
 # install
 ## linux
 
+## Windows
+library(devtools)
+devtools::install_local("strwh-2.0.0.zip")
+library("strwh")
+
 # example
 ```
 library(strwh)
