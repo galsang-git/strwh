@@ -137,9 +137,9 @@ strwh <- function(p, s='Ahkhds', units="mm", family="serif", fontsize=100, fontf
 
   #2.Convert text size
   if(bool_plot == "ggplot2"){
-    pt <- round(fontsize*ggplot2::.pt, 0)
+    pt <- as.integer(round(fontsize*ggplot2::.pt, 0))
   }else if(bool_plot == "grid"|bool_plot == "gpar"){
-    pt <- round(fontsize, 0)
+    pt <- as.integer(round(fontsize, 0))
   }else{
     print("\"p\" is not recognized as ggplot2 or grob.")
     return(NA)
