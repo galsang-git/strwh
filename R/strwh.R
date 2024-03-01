@@ -162,14 +162,18 @@ strwh <- function(p, s='Ahkhds', units="mm", family="serif", fontsize=100, fontf
   family_pil <- familynames_df[familynames_df$R == family, 'PIL']
 
   #4.Measure text's width
-  width <- pill_strwh_measure(s, family=family_pil, fontface=fontface, size=pt,
+  res <- pill_strwh_measure(s, family=family_pil, fontface=fontface, size=pt,
                               tmp=tmp)
 
-  if(units == "mm"){
+  width <- res[[1]]
+  height <- res[[2]]
+  if (units == "mm") {
     width <- width/(72/25.4)
-  }else if(units == "inches"){
+    height <- height/(72/25.4)
+  }else if (units == "inches") {
     width <- width/72
+    height <- height/72
   }
-  return(width)
+  return(c(width, height))
 }
 
