@@ -111,4 +111,4 @@ def pill_strwh_measure(string, family, fontface, size, tmp):
     print(font_family_file)
     res = ImageFont.truetype(font_family_file, size, 0)
     box_px = res.getbbox(string)
-    return(box_px[2])
+    return((box_px[2], box_px[3]))
